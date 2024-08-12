@@ -7,8 +7,16 @@
 #include <stdlib.h>
 #include "biblioteca/funciones/strings.hpp"
 #include "biblioteca/funciones/tokens.hpp"
+#include "biblioteca/funciones/files.hpp"
 #include "biblioteca/tads/colldiscord.hpp"
 using namespace std;
+
+struct Ciudad
+{
+	int idCiu;
+	char descr[20];
+	int millas;
+};
 
 struct Persona
 {
@@ -23,9 +31,73 @@ struct RPersona
 	int cont;
 };
 
-string personaToString(Persona x)
+string ciudadToString(Ciudad x)
 {
 	char sep = 1;
+	string sIdCiu=to_string(x.idCiu);
+	string sDescr=x.descr;
+	string sMillas=to_string(x.millas);
+	return sIdCiu+sep+sDescr+sep+sMillas;
+}
+
+Ciudad ciudadFromString(string s)
+{
+	char sep = 1;
+	Ciudad x;
+	string t0 = getTokenAt(s,sep,0);
+	x.idCiu=stoi(t0);
+	string t1 = getTokenAt(s,sep,1);
+	strcpy(x.descr,t1.c_str());
+	string t2 = getTokenAt(s,sep,2);
+	x.millas=stoi(t2);
+	return x;
+}
+
+string ciudadToDebug(Ciudad x)
+{
+	stringstream sout;
+	sout<< "[";
+	sout << x.idCiu;
+	sout << ",";
+	sout << x.descr;
+	sout << ",";
+	sout << x.millas;
+	sout<< "]";
+	return sout.str();
+}
+
+string ciudadToDebug(string mssg,Ciudad x)
+{
+	stringstream sout;
+	sout<< mssg<<":[";
+	sout << x.idCiu;
+	sout << ",";
+	sout << x.descr;
+	sout << ",";
+	sout << x.millas;
+	sout<< "]";
+	return sout.str();
+}
+
+Ciudad ciudad(int idCiu,string descr,int millas)
+{
+	Ciudad a;
+	a.idCiu = idCiu;
+	strcpy(a.descr,descr.c_str());
+	a.millas = millas;
+	return a;
+}
+
+bool ciudadEquals(Ciudad a,Ciudad b)
+{
+	if(a.idCiu!=b.idCiu) return false;
+	if(a.millas!=b.millas) return false;
+	return true;
+}
+
+string personaToString(Persona x)
+{
+	char sep = 2;
 	string sDni=to_string(x.dni);
 	string sNombre=x.nombre;
 	string sDireccion=x.direccion;
@@ -34,7 +106,7 @@ string personaToString(Persona x)
 
 Persona personaFromString(string s)
 {
-	char sep = 1;
+	char sep = 2;
 	Persona x;
 	string t0 = getTokenAt(s,sep,0);
 	x.dni=stoi(t0);
@@ -90,7 +162,7 @@ bool personaEquals(Persona a,Persona b)
 
 string rPersonaToString(RPersona x)
 {
-	char sep = 2;
+	char sep = 3;
 	string sP=personaToString(x.p);
 	string sCont=to_string(x.cont);
 	return sP+sep+sCont;
@@ -98,7 +170,7 @@ string rPersonaToString(RPersona x)
 
 RPersona rPersonaFromString(string s)
 {
-	char sep = 2;
+	char sep = 3;
 	RPersona x;
 	string t0 = getTokenAt(s,sep,0);
 	x.p=personaFromString(t0);

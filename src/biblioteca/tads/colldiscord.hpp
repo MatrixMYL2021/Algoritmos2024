@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include "../funciones/strings.hpp"
 #include "../funciones/tokens.hpp"
+#include "../funciones/files.hpp"
+
 
 using namespace std;
 
