@@ -18,6 +18,8 @@ https://MatrixMYL2021:<"token (luego sacas los simbolos <>)">@github.com || cont
 git config --global credential.helper 
 store (debe devolver eso)
 
+4- Para mejorar el calibre de colores de pantallas tft, descargar "sudo apt install xcalib" y calibrar con comando, xcalib -gc 1.4 -alter y listo 
+
 y listo
 
 a PROGRAMAR !
