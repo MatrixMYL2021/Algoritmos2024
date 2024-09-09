@@ -1,3 +1,23 @@
 AGUANTE MILLER
 
 LILIA I LOVE YOU 2024
+
+
+-----------------------
+
+configuracion en entorno LINUX ubuntu/mint de la notebook
+
+1- Para reasignar la tecla de mayor/menor "<>" hay que usar el programa INPUT-REMAPPER de la linux store apps. Reasignar la tecla manualmente y llamarla como "LESS" y listo
+
+2- Para instalar el IDE ECLIPSE, descarga el instalador desde la web, luego descomprimir, y por ultimo ejecutar el archivo eclipse-isnt con el comando en terminal ./eclipse-inst y seguir los pasos y listo. Antes muy importante descargar el JDK por consola, aunque igual el eclipse te lo hace por si solo.
+
+3- Para configurar el GIT, se instala con "sudo apt install git" || Cada que hagas un push o pull te pedira que te logees, se hace mediante TOKEN, desde la web generas un TOKEN, que luego deberas guardarlo en el archivo : 
+
+"nano ~/.git-credentials"
+https://MatrixMYL2021:<"token (luego sacas los simbolos <>)">@github.com
+git config --global credential.helper 
+store (debe devolver eso)
+
+y listo
+
+a PROGRAMAR !
