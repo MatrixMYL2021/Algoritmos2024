@@ -14,7 +14,7 @@ configuracion en entorno LINUX ubuntu/mint de la notebook
 3- Para configurar el GIT, se instala con "sudo apt install git" || Cada que hagas un push o pull te pedira que te logees, se hace mediante TOKEN, desde la web generas un TOKEN, que luego deberas guardarlo en el archivo : 
 
 "nano ~/.git-credentials"
-https://MatrixMYL2021:<"token (luego sacas los simbolos <>)">@github.com
+https://MatrixMYL2021:<"token (luego sacas los simbolos <>)">@github.com || control o (guardar), luego ENTER, y control x para salir, importante !
 git config --global credential.helper 
 store (debe devolver eso)
 
