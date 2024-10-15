@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elecciones Legislativas 2025 - Argentina</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-3">
+        <h1>Elecciones Legislativas 2025 - Argentina</h1>
+    </header>
+
+    <main class="container mt-4">
+        <div id="provincias" class="text-center mb-4">
+            <button class="btn btn-primary me-2" onclick="seleccionarProvincia('PBA', 35)">Provincia de Buenos Aires (PBA) - 35 escaños</button>
+            <button class="btn btn-primary me-2" onclick="seleccionarProvincia('Córdoba', 9)">Córdoba - 9 escaños</button>
+            <button class="btn btn-primary" onclick="seleccionarProvincia('CABA', 13)">Ciudad Autónoma de Buenos Aires (CABA) - 13 escaños</button>
+        </div>
+
+        <div id="formularioVotos" class="hidden">
+            <h2 class="mb-4 text-center">Ingresar Votos para <span id="provinciaSeleccionada" class="text-primary"></span></h2>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label class="form-label">Partido A: </label>
+                    <input type="number" class="form-control" id="partidoA" value="0">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Partido B: </label>
+                    <input type="number" class="form-control" id="partidoB" value="0">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Partido C: </label>
+                    <input type="number" class="form-control" id="partidoC" value="0">
+                </div>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-success" onclick="calcularResultados()">Calcular</button>
+            </div>
+        </div>
+
+        <div id="resultados" class="hidden mt-5">
+            <h2 class="text-center">Resultados para <span id="provinciaResultado" class="text-primary"></span></h2>
+            <table id="tablaResultados" class="table table-striped table-bordered mt-4">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Partido</th>
+                        <th>Votos</th>
+                        <th>Porcentaje</th>
+                        <th>Escaños</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los resultados se agregarán dinámicamente aquí -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Contenedor para el gráfico -->
+        <div id="graficoEscanos" style="height: 400px; max-width: 600px; margin: 50px auto;" class="hidden"></div>
+
+    </main>
+
+    <!-- Highcharts Script -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+    <!-- Bootstrap JS (opcional para funcionalidad adicional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Archivo JS -->
+    <script src="script.js"></script>
+</body>
+</html>
