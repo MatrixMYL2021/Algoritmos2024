@@ -1,0 +1,73 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+struct PalabraRegistro {
+    int orden;
+    string palabra;
+    int cuentaA;
+
+    PalabraRegistro(int o, const string& p) : orden(o), palabra(p), cuentaA(0) {
+        // Contar las letras 'A' o 'a' en la palabra
+        for (char c : p) {
+            if (tolower(c) == 'a') {
+                cuentaA++;
+            }
+        }
+    }
+};
+
+// Función para ordenar según la cantidad de letras 'A'
+bool compararPorCantidadA(const PalabraRegistro& a, const PalabraRegistro& b) {
+    return a.cuentaA < b.cuentaA;
+}
+
+int main() {
+    vector<PalabraRegistro> palabras;
+    string entrada;
+    int contador = 1;
+
+    cout << "Ingresa palabras (finaliza con 'FIN'):" << endl;
+
+    // Lectura de palabras hasta que se ingrese "FIN"
+    while (true) {
+        getline(cin, entrada);
+        if (entrada == "FIN") break;
+        palabras.emplace_back(contador++, entrada);
+    }
+
+    // Ordenar las palabras por la cantidad de letras 'A'
+    sort(palabras.begin(), palabras.end(), compararPorCantidadA);
+
+    // Guardar en el archivo
+    ofstream archivo("PALABRAS.dat", ios::binary);
+    if (!archivo) {
+        cerr << "No se pudo abrir el archivo para escribir." << endl;
+        return 1;
+    }
+
+    for (const auto& palabra : palabras) {
+        archivo.write(reinterpret_cast<const char*>(&palabra.orden), sizeof(int));
+        archivo.write(palabra.palabra.c_str(), palabra.palabra.size() + 1); // +1 para el terminador null
+    }
+    archivo.close();
+
+    // Verificación del contenido del archivo
+    ifstream archivoVerificacion("PALABRAS.dat", ios::binary);
+    if (!archivoVerificacion) {
+        cerr << "No se pudo abrir el archivo para lectura." << endl;
+        return 1;
+    }
+
+    cout << "\nContenido de 'PALABRAS.dat':" << endl;
+    while (archivoVerificacion.read(reinterpret_cast<char*>(&contador), sizeof(int))) {
+        getline(archivoVerificacion, entrada, '\0'); // Leer hasta el terminador null
+        cout << "Orden: " << contador << ", Palabra: " << entrada << endl;
+    }
+    archivoVerificacion.close();
+
+    return 0;
+}
